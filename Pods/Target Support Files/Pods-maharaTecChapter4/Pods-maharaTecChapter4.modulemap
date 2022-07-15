@@ -1,0 +1,6 @@
+framework module Pods_maharaTecChapter4 {
+  umbrella header "Pods-maharaTecChapter4-umbrella.h"
+
+  export *
+  module * { export * }
+}
