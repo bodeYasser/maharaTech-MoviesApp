@@ -1,6 +1,6 @@
 import UIKit
 
-struct Movie :Decodable {
+struct Movie : Codable {
     var title : String
     var image : String
     var rating : Double

@@ -24,9 +24,17 @@ class LoginVC: UIViewController {
             
             if verifiedLogin {
                 print("you are logging")
+                let userDefaults = UserDefaults.standard
+                userDefaults.set(true, forKey: "loginState")
                let vc = storyboard?.instantiateViewController(withIdentifier: "MoviesListVC") as! ViewController
                 
-                navigationController?.pushViewController(vc, animated: true)
+
+                // i used this
+                //navigationController?.viewControllers = [vc]
+                //make screen un-clickable because i give it vc not navigation controller
+                //view.window?.rootViewController = vc
+                //
+                view.window?.rootViewController = UINavigationController(rootViewController: vc)
             }
             else {
                 print("error in login")
@@ -38,7 +46,8 @@ class LoginVC: UIViewController {
     }
     func verifyLogin(user : String, password : String) -> Bool {
         
-        return (user == "abdallah") && (password == "123456")
+        //add your user & password
+        return (user == "") && (password == "")
         
     }
     

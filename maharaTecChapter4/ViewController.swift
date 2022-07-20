@@ -6,28 +6,25 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //next line to make app wait until get all data
-        let sem = DispatchSemaphore.init(value: 0)
         let url = URL(string: "http://localhost:3000/comments/")
         let request = URLRequest(url: url!)
         let session = URLSession(configuration: URLSessionConfiguration.default)
         let task =  session.dataTask(with: request) { data, response, error in
-            //next line to make app wait until get all data
-            defer { sem.signal() }
             guard let jsonData = data else {return}
+            
             let decoder = JSONDecoder()
             let response  = try? decoder.decode([Movie].self, from: jsonData)
             guard let responseNonOptinal = response else {return}
             movies = responseNonOptinal
             print("hi man")
+            
+            DispatchQueue.main.async {
+                self.movieCollectionView.reloadData()
+            }
+            
 
         }
-        
-        
-        
          task.resume()
-        //next line to make app wait until get all data
-        sem.wait()
         movieCollectionView.dataSource = self
         movieCollectionView.delegate = self
         print("man")
