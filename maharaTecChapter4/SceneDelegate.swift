@@ -14,15 +14,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
-    
+        //get login state from userDefaults
         let isloggedIn = UserDefaults.standard.bool(forKey: "loginState")
-        print(isloggedIn)
+        //print login state
+        //print(isloggedIn)
+        
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        //if login is true set root viewController to MoviesListVC
+        //else nothing
                 if isloggedIn {
                     
                     // seem that i make shit to change root vc
                     let vc = storyboard.instantiateViewController(withIdentifier: "MoviesListVC") as! ViewController
-                    // i used this
+                    // if i use this it will 
                     //make screen un-clickable because i give it vc not a navigation controller
                     //self.window?.rootViewController = vc
                     self.window?.rootViewController = UINavigationController(rootViewController: vc)
